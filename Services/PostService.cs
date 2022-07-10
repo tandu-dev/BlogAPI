@@ -33,7 +33,7 @@ namespace BlogWebAPIwithJWT.Services {
             
             return await db.Posts
             .Join(db.Categories, p => p.CategoryId, c=>c.categoryId, (p, c) => new {p, c})
-            .OrderByDescending(s => s.p.Id)
+            .OrderByDescending(s => s.p.Timestamp)
             .Skip((pg.PageNumber -1)*pg.PageSize)
             .Take(pg.PageSize)
             .Select(s => new EditPost() {Id = s.p.Id, Title = s.p.Title, 
